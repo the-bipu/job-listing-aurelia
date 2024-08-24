@@ -55,9 +55,10 @@
     "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
-    "build": "aurelia build --output public",
+    "build": "webpack --env production",
     "start": "webpack server",
     "build:dev": "webpack",
+    "build:vercel": "webpack --env production",
     "analyze": "webpack --env production --analyze",
     "test": "au test"
   },
