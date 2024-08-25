@@ -21,6 +21,10 @@ export class App {
     );
   }
 
+  public removeAllItems(): void {
+    this.clickedItems.splice(0, this.clickedItems.length);
+  }  
+
   public get filteredData() {
     if (this.clickedItems.length === 0) {
       return this.data;

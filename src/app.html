@@ -8,20 +8,26 @@
       class="w-full h-auto flex items-center justify-center relative"
     >
       <div
-        class="w-10/12 h-[72px] bg-white shadow absolute rounded-md flex justify-start items-center gap-4 px-4"
+        class="w-10/12 h-[72px] bg-white shadow absolute rounded-md flex justify-between items-center gap-4 md:px-6 px-4"
       >
-        <div
-          class="bg-[#EFFAFA] rounded text-[#5BA4A4] font-bold cursor-pointer"
-          repeat.for="clickedItem of clickedItems"
-        >
-          <span class="p-1 px-2">${clickedItem.item}</span>
-          <button 
-            click.delegate="removeItem(clickedItem)"
-            class="bg-[#5BA4A4] hover:bg-[#2C3A3A] p-1 px-2 text-white rounded-tr rounded-br"
+        <div class="w-auto h-auto flex flex-row gap-4 items-center justify-start">
+          <div
+            class="bg-[#EFFAFA] rounded text-[#5BA4A4] font-bold cursor-pointer"
+            repeat.for="clickedItem of clickedItems"
           >
-            X
-          </button>
+            <span class="p-1 px-2">${clickedItem.item}</span>
+            <button 
+              click.delegate="removeItem(clickedItem)"
+              class="bg-[#5BA4A4] hover:bg-[#2C3A3A] p-1 px-2 text-white rounded-tr rounded-br"
+            >
+              X
+            </button>
+          </div>
         </div>
+        <div 
+          class="text-[#5BA4A4] hover:underline font-semibold"
+          click.delegate="removeAllItems()"
+        >Clear</div>
       </div>
     </div>
 
@@ -61,7 +67,7 @@
                   >FEATURED</span
                 >
               </div>
-              <div class="text-xl font-bold text-[#2C3A3A]">
+              <div class="text-xl font-bold text-[#2C3A3A] hover:text-[#5BA4A4] mt-1">
                 ${job.position}
               </div>
               <div
@@ -76,20 +82,20 @@
             </div>
           </div>
           <div class="flex flex-row gap-4">
-            <span
-              class="bg-[#EFFAFA] p-1 px-2 rounded text-[#5BA4A4] font-bold"
+            <button
+              class="bg-[#EFFAFA] hover:bg-[#5BA4A4] p-1 px-2 rounded text-[#5BA4A4] hover:text-white font-bold cursor-pointer"
               repeat.for="language of job.languages"
               click.delegate="logItem(language, 'language')"
             >
               ${language}
-            </span>
-            <span
-              class="bg-[#EFFAFA] p-1 px-2 rounded text-[#5BA4A4] font-bold"
+            </button>
+            <button
+              class="bg-[#EFFAFA] hover:bg-[#5BA4A4] p-1 px-2 rounded text-[#5BA4A4] hover:text-white font-bold cursor-pointer"
               repeat.for="tool of job.tools"
               click.delegate="logItem(tool, 'tool')"
             >
               ${tool}
-            </span>
+            </button>
           </div>
         </div>
       </div>
