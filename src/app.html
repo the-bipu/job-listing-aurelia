@@ -1,165 +1,128 @@
 <template>
-  <h1>${message}</h1>
+  <div class="w-full min-h-screen bg-[#EFFAFA]">
 
-  <div class="job-listings">
-    <div class="job-card" repeat.for="job of data">
-      <img src.bind="job.logo" alt="${job.company} logo" class="company-logo" />
-      <div class="job-details">
-        <div class="company-info">
-          <span class="company-name">${job.company}</span>
-          <span if.bind="job.new" class="badge new">NEW!</span>
-          <span if.bind="job.featured" class="badge featured">FEATURED</span>
-        </div>
-        <div class="job-position">${job.position}</div>
-        <div class="job-meta">
-          <span>${job.postedAt}</span>
-          <span>&bull;</span>
-          <span>${job.contract}</span>
-          <span>&bull;</span>
-          <span>${job.location}</span>
-        </div>
-      </div>
-      <div class="job-tags">
-        <span class="tag" repeat.for="language of job.languages"
-          >${language}</span
+    <div class="w-full bg-Banner bg-[#5BA4A4]"></div>
+
+    <div 
+      if.bind="clickedItems.length > 0"
+      class="w-full h-auto flex items-center justify-center relative"
+    >
+      <div
+        class="w-10/12 h-[72px] bg-white shadow absolute rounded-md flex justify-start items-center gap-4 px-4"
+      >
+        <div
+          class="bg-[#EFFAFA] rounded text-[#5BA4A4] font-bold cursor-pointer"
+          repeat.for="clickedItem of clickedItems"
         >
-        <span class="tag" repeat.for="tool of job.tools">${tool}</span>
+          <span class="p-1 px-2">${clickedItem.item}</span>
+          <button 
+            click.delegate="removeItem(clickedItem)"
+            class="bg-[#5BA4A4] hover:bg-[#2C3A3A] p-1 px-2 text-white rounded-tr rounded-br"
+          >
+            X
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="bg-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quisquam doloremque voluptates nostrum, id explicabo illo animi dolore dolorum tempore deleniti adipisci a, excepturi, fugit blanditiis temporibus! Nam, assumenda corporis.</div>
+    <!-- Main div with 100% width -->
+    <div
+      class="py-16 bg-[#EFFAFA] w-full h-auto flex flex-col items-center justify-center"
+    >
+      <!-- Secondary division with 10/12 width -->
+      <div
+        class="md:w-10/12 w-11/12 h-full flex flex-col md:gap-6 gap-16 md:pt-0 pt-6"
+      >
+        <!-- Cards code starts from here -->
+        <div
+          class="flex md:flex-row flex-col justify-between md:items-center items-start md:gap-8 gap-4 p-8 bg-white rounded-md min-h-[152px] w-full shadow-md"
+          repeat.for="job of filteredData"
+          class.bind="job.featured ? 'border-l-[6px] border-[#5BA4A4]' : ''"
+        >
+          <div class="flex w-full md:flex-row flex-col gap-8 relative">
+            <img
+              src.bind="job.logo"
+              alt="${job.company} logo"
+              class="md:w-auto w-16 md:relative absolute md:top-0 -top-16"
+            />
+            <div
+              class="md:w-auto w-full flex flex-col gap-1 justify-center md:pt-0 pt-2"
+            >
+              <div class="w-auto h-auto flex flex-row gap-2">
+                <span class="text-[#5BA4A4] font-bold">${job.company}</span>
+                <span
+                  if.bind="job.new"
+                  class="bg-[#5BA4A4] px-3 pt-1 pb-[1px] h-6 rounded-full text-[#fff] font-bold flex items-center justify-center"
+                  >NEW!</span
+                >
+                <span
+                  if.bind="job.featured"
+                  class="bg-[#2C3A3A] px-3 pt-1 pb-[1px] h-6 rounded-full text-[#fff] font-bold flex items-center justify-center w-auto"
+                  >FEATURED</span
+                >
+              </div>
+              <div class="text-xl font-bold text-[#2C3A3A]">
+                ${job.position}
+              </div>
+              <div
+                class="text-[#7B8E8E] flex flex-row gap-2 md:border-0 border-b md:border-none border-b-[#BEC0BF] md:pb-0 pb-4"
+              >
+                <span>${job.postedAt}</span>
+                <span>&bull;</span>
+                <span>${job.contract}</span>
+                <span>&bull;</span>
+                <span>${job.location}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row gap-4">
+            <span
+              class="bg-[#EFFAFA] p-1 px-2 rounded text-[#5BA4A4] font-bold"
+              repeat.for="language of job.languages"
+              click.delegate="logItem(language, 'language')"
+            >
+              ${language}
+            </span>
+            <span
+              class="bg-[#EFFAFA] p-1 px-2 rounded text-[#5BA4A4] font-bold"
+              repeat.for="tool of job.tools"
+              click.delegate="logItem(tool, 'tool')"
+            >
+              ${tool}
+            </span>
+          </div>
+        </div>
+      </div>
 
-  <!-- Item Start -->
-  Photosnap New! Featured Senior Frontend Developer 1d ago Full Time USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Senior
-  <!-- Languages -->
-  HTML CSS JavaScript
-  <!-- Item End -->
+      <!-- <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Your Name Here</a>.
+      </div> -->
+    </div>
 
-  <!-- Item Start -->
-  Manage New! Featured Fullstack Developer 1d ago Part Time Remote
-  <!-- Role -->
-  Fullstack
-  <!-- Level -->
-  Midweight
-  <!-- Languages -->
-  Python
-  <!-- Tools -->
-  React
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Account New! Junior Frontend Developer 2d ago Part Time USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  JavaScript
-  <!-- Tools -->
-  React Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  MyHome Junior Frontend Developer 5d ago Contract USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  CSS JavaScript
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Loop Studios Software Engineer 1w ago Full Time Worldwide
-  <!-- Role -->
-  Fullstack
-  <!-- Level -->
-  Midweight
-  <!-- Languages -->
-  JavaScript Ruby
-  <!-- Tools -->
-  Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  FaceIt Junior Backend Developer 2w ago Full Time UK only
-  <!-- Role -->
-  Backend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  Ruby
-  <!-- Tools -->
-  RoR
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Shortly Junior Developer 2w ago Full Time Worldwide
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  HTML JavaScript
-  <!-- Tools -->
-  Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Insure Junior Frontend Developer 2w ago Full Time USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  JavaScript
-  <!-- Tools -->
-  Vue Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Eyecam Co. Full Stack Engineer 3w ago Full Time Worldwide
-  <!-- Role -->
-  Fullstack
-  <!-- Level -->
-  Midweight
-  <!-- Languages -->
-  JavaScript Python
-  <!-- Tools -->
-  Django
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  The Air Filter Company Front-end Dev 1mo ago Part Time Worldwide
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  JavaScript
-  <!-- Tools -->
-  React Sass
-  <!-- Item End -->
-
-  <div class="attribution">
-    Challenge by
-    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-      >Frontend Mentor</a
-    >. Coded by <a href="#">Your Name Here</a>.
   </div>
 
   <style>
+    body {
+      font-family: "League Spartan", sans-serif;
+    }
+
     .attribution {
       font-size: 11px;
       text-align: center;
     }
     .attribution a {
       color: hsl(228, 45%, 44%);
+    }
+
+    .bg-Banner {
+      background-image: url(/images/bg-header-desktop.svg);
+      background-repeat: no-repeat;
+      width: 100%;
+      min-height: 156px;
+      background-size: cover;
     }
   </style>
 </template>
